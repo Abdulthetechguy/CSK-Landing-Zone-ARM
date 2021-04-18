@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "csk-RG-Net-Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Newtork RG"
+            }
+        },
+        "csk-RG-mgmt-Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Management RG"
+            }
+        },
+        "csk-RG-location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location of RG"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources":[
+        {
+            "name": "[parameters('csk-RG-Net-Name')]",
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2019-10-01",
+            "location": "[parameters('csk-RG-location')]",
+            "dependsOn": [
+            ],
+            "tags": {
+            }
+        },
+        {
+            "name": "[parameters('csk-RG-mgmt-Name')]",
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2019-10-01",
+            "location": "[parameters('csk-RG-location')]",
+            "dependsOn": [
+            ],
+            "tags": {
+            }
+        }
+        
+    ],
+    "outputs": {}
+}

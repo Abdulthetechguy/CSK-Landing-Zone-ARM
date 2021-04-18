@@ -1,0 +1,95 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetname": {
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network Name"
+            }
+        },
+        "DC-Subnet-Name": {
+            "type": "string",
+            "metadata": {
+                "description": "DC Subnet Name"
+            }
+        },
+        "Mgt-Tools-Subnet-Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Mgmt Tools Subnet Name"
+            }
+        },
+        "Mgt-Subnet-Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Mgmt Subnet Name"
+            }
+        },
+        "Vnet-addrspace": {
+            "type": "string",
+            "metadata": {
+                "description": "Vnet Address Space"
+            }
+        },
+        "DC-Subnet-addrspace": {
+            "type": "string",
+            "metadata": {
+                "description": "DC Subnet Address Space"
+            }
+        },
+        "Mgmt-tools-vm-Subnet-addrspace": {
+            "type": "string",
+            "metadata": {
+                "description": "Mgmt tools VM Subnet Address Space"
+            }
+        },
+        "mgmt-Subnet-addrspace": {
+            "type": "string",
+            "metadata": {
+                "description": "Mgmt Subnet Address Space"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('vnetname')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2019-11-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "displayName": "[parameters('vnetname')]"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('Vnet-addrspace')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('DC-Subnet-Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('DC-Subnet-addrspace')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('Mgt-Subnet-Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('mgmt-Subnet-addrspace')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('Mgt-Tools-Subnet-Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('Mgmt-tools-vm-Subnet-addrspace')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}
